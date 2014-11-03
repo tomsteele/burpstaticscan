@@ -72,13 +72,13 @@ func main() {
 	}
 	resp.Body.Close()
 
-	log.Println("Walking directory, each file sent to burp's passive scan")
+	log.Println("Walking directory, each file will be sent to burp's passive scan")
 
 	if err := filepath.Walk(*dir, walker); err != nil {
 		log.Printf("Error during directory walk: %s", err.Error())
 	}
 
-	log.Printf("%d file sent to burp", count)
+	log.Printf("%d files sent to burp", count)
 
 	sresp, err := goreq.Request{
 		Method: "DELETE",
