@@ -19,7 +19,7 @@ $ ./burpstaticscan -dir ./foo
 ```
 
 ## Installation
-Depends on the [burpbuddy](https://github.com/liftsecurity/burpbuddy) extenstion. Binary packages for most operating systems are available [here](https://github.com/tomsteele/burpstaticscan/releases/latest). There are no external dependencies, just extract and run with `./burpstaticscan`.
+Depends on the [burpbuddy](https://github.com/liftsecurity/burpbuddy) extension. Binary packages for most operating systems are available [here](https://github.com/tomsteele/burpstaticscan/releases/latest). There are no external dependencies, just extract and run with `./burpstaticscan`.
 
 ## Usage
 ```
