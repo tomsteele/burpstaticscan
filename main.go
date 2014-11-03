@@ -79,18 +79,6 @@ func main() {
 	}
 
 	log.Printf("%d files sent to burp", count)
-
-	sresp, err := goreq.Request{
-		Method: "DELETE",
-		Uri:    *burpBuddyURL + "/scope/" + base64.StdEncoding.EncodeToString([]byte(localURL)),
-	}.Do()
-
-	if err != nil || sresp.StatusCode != 204 {
-		log.Printf("Error removing %s from scope", localURL)
-	} else {
-		log.Printf("%s removed from scope", localURL)
-	}
-
 }
 
 func walker(path string, info os.FileInfo, err error) error {
