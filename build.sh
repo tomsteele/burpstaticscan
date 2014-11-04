@@ -2,7 +2,7 @@
  
 for OS in "linux" "darwin" "windows"; do
     GOOS=$OS CGO_ENABLED=0 GOARCH=amd64 go build
-    FOLDER=burpstaticscan-1.0.0$OS-amd64
+    FOLDER=burpstaticscan-1.0.1$OS-amd64
     ARCHIVE=$FOLDER.tar.gz
     mkdir $FOLDER
     cp LICENSE $FOLDER
