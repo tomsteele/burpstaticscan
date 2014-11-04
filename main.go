@@ -90,7 +90,6 @@ func walker(path string, info os.FileInfo, err error) error {
 	}
 
 	resp, err := http.Get(localURL + parts[1])
-	log.Printf("%s%s - sent to burp", localURL, parts[1])
 
 	if err != nil {
 		log.Printf("Error getting %s from go http server: %s", parts[1], err.Error())
