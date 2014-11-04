@@ -15,6 +15,7 @@ import (
 )
 
 var dir *string
+var root *string
 var host *string
 var port *string
 var iport int
@@ -27,11 +28,12 @@ func init() {
 	host = flag.String("host", "localhost", "host for the file server to listen on")
 	port = flag.String("port", "9999", "port for the file server to listen on")
 	dir = flag.String("dir", "", "directory with code to scan")
+	root = flag.String("root", "", "root to serve from")
 	burpBuddyURL = flag.String("burpbuddy", "http://localhost:8001", "HTTP API URL for burpbuddy")
 	flag.Parse()
 
 	if *dir == "" {
-		log.Fatal("dir is required")
+		log.Fatal("--dir is required")
 	}
 
 	d, err := filepath.Abs(*dir)
@@ -45,13 +47,13 @@ func init() {
 		log.Fatalf("Error converting port to int: %s", err.Error())
 	}
 	count = 0
-	localURL = fmt.Sprintf("http://%s:%s", *host, *port)
+	localURL = fmt.Sprintf("http://%s:%s%s", *host, *port, *root)
 }
 
 func main() {
 
 	go func() {
-		log.Fatal(http.ListenAndServe(*host+":"+*port, http.FileServer(http.Dir(*dir))))
+		log.Fatal(http.ListenAndServe(*host+":"+*port, http.StripPrefix(*root + "/", http.FileServer(http.Dir(*dir)))))
 	}()
 
 	log.Printf("Static file server listening on %s, serving %s", localURL, *dir)
@@ -88,6 +90,7 @@ func walker(path string, info os.FileInfo, err error) error {
 	}
 
 	resp, err := http.Get(localURL + parts[1])
+	log.Printf("%s%s - sent to burp", localURL, parts[1])
 
 	if err != nil {
 		log.Printf("Error getting %s from go http server: %s", parts[1], err.Error())
