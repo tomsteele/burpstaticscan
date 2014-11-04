@@ -53,7 +53,7 @@ func init() {
 func main() {
 
 	go func() {
-		log.Fatal(http.ListenAndServe(*host+":"+*port, http.StripPrefix(*root + "/", http.FileServer(http.Dir(*dir)))))
+		log.Fatal(http.ListenAndServe(*host+":"+*port, http.StripPrefix(*root+"/", http.FileServer(http.Dir(*dir)))))
 	}()
 
 	log.Printf("Static file server listening on %s, serving %s", localURL, *dir)
