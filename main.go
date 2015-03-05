@@ -89,15 +89,15 @@ func walker(path string, info os.FileInfo, err error) error {
 	if parts[1] == "" {
 		return nil
 	}
-
-	resp, err := http.Get(localURL + parts[1])
+	fname := strings.Replace(parts[1], "\\", "/", -1)
+	resp, err := http.Get(localURL + fname)
 
 	if err != nil {
-		log.Printf("Error getting %s from go http server: %s", parts[1], err.Error())
+		log.Printf("Error getting %s from go http server: %s", fname, err.Error())
 		return nil
 	}
 	if resp.StatusCode != 200 {
-		log.Printf("Non 200 status code from go for %s", parts[1])
+		log.Printf("Non 200 status code from go for %s", fname)
 		return nil
 	}
 
