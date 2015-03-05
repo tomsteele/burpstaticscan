@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"flag"
 	"fmt"
-	"github.com/franela/goreq"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -12,6 +11,8 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/franela/goreq"
 )
 
 var dir *string
