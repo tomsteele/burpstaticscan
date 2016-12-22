@@ -22,7 +22,6 @@ var port *string
 var iport int
 var burpBuddyURL *string
 var localURL string
-
 var count int
 
 func init() {
@@ -112,7 +111,7 @@ func walker(path string, info os.FileInfo, err error) error {
 		return nil
 	}
 
-	r := PassivScanRequest{
+	r := PassiveScanRequest{
 		Host:     *host,
 		Port:     iport,
 		UseHTTPS: false,
@@ -138,7 +137,7 @@ func walker(path string, info os.FileInfo, err error) error {
 
 	defer resp.Body.Close()
 	defer presp.Body.Close()
-	count += 1
+	count++
 
 	return nil
 }
